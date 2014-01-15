@@ -1,0 +1,78 @@
+<section class="row" id="wrapper">
+	<div class= "col-xs-4 col-xs-offset-2">
+		<h3>Kebob Us</h3>
+		<form id='contact-form'>
+			<strong>Personal Information</strong>
+			<div class="form-group">
+				<label class= "sr-only" for="contact-name">Name</label>
+				<input type="text" id="contact-name" placeholder="Name"
+				class="form-control" value="">
+			</div>
+			<div class="form-group">
+				<label class= "sr-only" for="contact-email">Name</label>
+				<input type="text" id="contact-email" placeholder="Email address"
+				class="form-control">
+			</div>
+
+			<strong>Message</strong>
+			<div class="form-group">
+				<label class= "sr-only" for="contact-subject">Name</label>
+				<input type="text" id="contact-subject" placeholder="Subject"
+				class="form-control">
+			</div>
+			<div class="form-group">
+				<label class= "sr-only" for="contact-message">Name</label>
+				<textarea id="contact-message" placeholder="Your Message"
+				class="form-control" rows=6></textarea>
+			</div>
+			<button class="btn-lg btn-primary btn" id="contact-submit" data-target="#myModal">Kebob!</button>
+		</form>
+	</div>
+	<div class= "col-xs-4">
+		<br><br><br>
+		<h4>Kebobs are good to eat</h4>
+		<p>Have a question or need a kebob? Use this form or contact us at <a href="mailto:kebob@kebob.kebob">kebob@kebob.kebob</a>. Our Kebob Center can help you get kebobs to your kebob hungers fast and easy!</p>
+		<hr>
+		<p> For known issues and other site news:
+	</div>
+</section>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
+				<h4 class="modal-title" id="myModalLabel">Contact Sent</h4>
+			</div>
+			<div class="modal-body">
+				<p> Our Kebob specialist will contact you shortly regarding your kebob request<p>
+		</div>
+	</div>
+</div>
+
+<script>
+$('#contact-submit').on('click', function(event){
+	if(validateForm($('#contact-form'))){
+		$('#myModal').modal();
+		$("div.alert").remove();
+	} else {
+		var a = $('<div>').addClass("alert alert-danger").text("You fucked up, son.");
+		$("#wrapper").prepend(a);
+	}
+});
+
+var validateForm = function(form){
+	var blanks = true
+	console.log(form.find('input'));
+	form.find('input').each(function(index, element){
+		var $e = $(element)
+		if ($e.val() === "") {
+			blanks = false;
+			$e.parent().addClass("has-error")
+		} else {
+				$e.parent().addClass("has-success")
+		}
+	});
+	return blanks;
+}
+</script>
